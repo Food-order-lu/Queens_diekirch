@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurant Queens | Diekirch – Cuisine Portugaise & Grillades</title>
+  <meta name="description" content="Restaurant Queens à Diekirch, Luxembourg. Cuisine portugaise traditionnelle, grillades, menu du jour. 19 Esplanade, 9220 Diekirch." />
+  <meta property="og:title" content="Restaurant Queens | Diekirch" />
+  <meta property="og:description" content="Cuisine portugaise traditionnelle, grillades et spécialités maison à Diekirch, Luxembourg." />
+  <meta property="og:image" content="images/hero.png" />
+  <meta property="og:type" content="restaurant" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="images/logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+  <!-- ====== NAVIGATION ====== -->
+  <header class="navbar" id="navbar" role="banner">
+    <div class="navbar__inner">
+      <a href="#hero" class="navbar__logo" aria-label="Restaurant Queens – Accueil">
+        <img src="images/logo.png" alt="Queens Logo – Couronne dorée" width="44" height="44" />
+        <span class="navbar__brand">Queens</span>
+      </a>
+      <nav class="navbar__nav" id="navMenu" role="navigation" aria-label="Navigation principale">
+        <ul class="navbar__list">
+          <li><a href="#hero" class="navbar__link" data-nav>Accueil</a></li>
+          <li><a href="#menu" class="navbar__link" data-nav>Menu</a></li>
+          <li><a href="#galerie" class="navbar__link" data-nav>Galerie</a></li>
+          <li><a href="#contact" class="navbar__link" data-nav>Contact</a></li>
+        </ul>
+      </nav>
+      <div class="navbar__actions">
+        <a href="#contact" class="btn btn--primary btn--sm navbar__cta-btn" aria-label="Réserver une table">Réserver</a>
+        <button class="navbar__burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile nav overlay -->
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+  <main>
+
+    <!-- ====== HERO ====== -->
+    <section class="hero" id="hero" aria-label="Bienvenue au Restaurant Queens">
+      <div class="hero__bg">
+        <img src="images/hero.jpg" alt="L'équipe du Restaurant Queens – Café Restaurant à Diekirch" loading="eager" />
+      </div>
+      <div class="hero__overlay"></div>
+      <div class="hero__content animate-fadein">
+        <img src="images/logo.png" alt="Logo Queens" class="hero__logo" width="120" height="120" />
+        <h1 class="hero__title">Restaurant Queens</h1>
+        <p class="hero__subtitle">Cuisine Portugaise & Grillades · Diekirch</p>
+        <p class="hero__tagline">Tradition, saveurs et passion depuis le cœur du Luxembourg</p>
+        <div class="hero__cta">
+          <a href="#menu" class="btn btn--primary" aria-label="Voir le menu">📋 Menu de la Semaine</a>
+          <a href="#contact" class="btn btn--outline" aria-label="Nous contacter">📍 Nous Trouver</a>
+        </div>
+      </div>
+      <div class="hero__scroll" aria-hidden="true">
+        <span>↓</span>
+      </div>
+    </section>
+
+
+
+    <!-- ====== MENU DE LA SEMAINE ====== -->
+    <section class="menu-section" id="menu" aria-label="Menu de la Semaine">
+      <div class="container">
+        <div class="section-header animate-fadein">
+          <span class="section-header__crown" aria-hidden="true">👑</span>
+          <h2 class="section-header__title">Menu de la Semaine</h2>
+          <p class="section-header__subtitle">Découvrez nos spécialités de la semaine</p>
+          <div class="section-header__divider" aria-hidden="true"></div>
+        </div>
+
+        <div class="menu-display animate-fadein" id="menuDisplay">
+          <!-- If admin uploaded a menu image, show it here -->
+          <div class="menu-display__placeholder" id="menuPlaceholder">
+            <p>📋 Le menu de la semaine sera bientôt affiché.</p>
+            <p>Consultez notre <a href="https://www.facebook.com/profile.php?id=61586475113924" target="_blank" rel="noopener noreferrer">page Facebook</a> pour les dernières mises à jour.</p>
+          </div>
+          <img id="menuImage" class="menu-display__image" src="" alt="Menu de la Semaine – Restaurant Queens" style="display:none;" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== GALERIE DOUCE TENTATION ====== -->
+    <section class="gallery-section" id="galerie" aria-label="Galerie Douce Tentation">
+      <div class="container">
+        <div class="section-header animate-fadein">
+          <span class="section-header__crown" aria-hidden="true">📸</span>
+          <h2 class="section-header__title">Douce Tentation</h2>
+          <p class="section-header__subtitle">Nos plats qui font voyager vos papilles</p>
+          <div class="section-header__divider" aria-hidden="true"></div>
+        </div>
+
+        <div class="gallery-mosaic animate-fadein" id="galleryGrid" role="list" aria-label="Photos de nos plats">
+          <!-- Gallery items rendered by JS (from defaults + admin uploads) -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== CONTACT / FOOTER ====== -->
+    <section class="contact-section" id="contact" aria-label="Informations de contact">
+      <div class="container">
+        <div class="section-header animate-fadein">
+          <span class="section-header__crown" aria-hidden="true">📍</span>
+          <h2 class="section-header__title">Nous Trouver</h2>
+          <p class="section-header__subtitle">Venez nous rendre visite au cœur de Diekirch</p>
+          <div class="section-header__divider" aria-hidden="true"></div>
+        </div>
+
+        <div class="contact-grid animate-fadein">
+          <div class="contact-card">
+            <div class="contact-card__icon" aria-hidden="true">📍</div>
+            <h3 class="contact-card__title">Adresse</h3>
+            <p>19, Esplanade<br />9220 Diekirch<br />Luxembourg</p>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card__icon" aria-hidden="true">📞</div>
+            <h3 class="contact-card__title">Téléphone</h3>
+            <p><a href="tel:+352691187077">+352 691 187 077</a></p>
+            <p><a href="tel:+35227742814">+352 27 74 28 14</a></p>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card__icon" aria-hidden="true">🕐</div>
+            <h3 class="contact-card__title">Horaires</h3>
+            <ul class="hours-list">
+              <li><span>Lundi</span><span>11h – 22h</span></li>
+              <li class="hours-closed"><span>Mardi</span><span>Fermé</span></li>
+              <li><span>Mercredi</span><span>11h – 22h</span></li>
+              <li><span>Jeudi</span><span>11h – 22h</span></li>
+              <li><span>Vendredi</span><span>11h – 23h</span></li>
+              <li><span>Samedi</span><span>11h – 23h</span></li>
+              <li><span>Dimanche</span><span>11h – 22h</span></li>
+            </ul>
+          </div>
+          <div class="contact-card contact-card--social">
+            <div class="contact-card__icon" aria-hidden="true">💬</div>
+            <h3 class="contact-card__title">Suivez-nous</h3>
+            <a href="https://www.facebook.com/profile.php?id=61586475113924" target="_blank" rel="noopener noreferrer" class="btn btn--facebook" aria-label="Visitez notre page Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              Facebook
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-map animate-fadein">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2573.5!2d6.159!3d49.868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDnCsDUyJzA1LjAiTiA2wrAwOSczMi4wIkU!5e0!3m2!1sfr!2slu!4v1"
+            width="100%" 
+            height="350" 
+            style="border:0; border-radius: 16px;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Localisation Restaurant Queens Diekirch"
+            aria-label="Carte Google Maps montrant la localisation du Restaurant Queens à Diekirch">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====== LIGHTBOX ====== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visionneuse de photos" hidden>
+    <button class="lightbox__close" id="lightboxClose" aria-label="Fermer la visionneuse">&times;</button>
+    <button class="lightbox__prev" id="lightboxPrev" aria-label="Photo précédente">&#8249;</button>
+    <button class="lightbox__next" id="lightboxNext" aria-label="Photo suivante">&#8250;</button>
+    <div class="lightbox__content">
+      <img id="lightboxImg" src="" alt="" />
+      <p class="lightbox__caption" id="lightboxCaption"></p>
+    </div>
+  </div>
+
+
+
+  <div class="admin-panel" id="adminPanel" hidden>
+    <div class="admin-panel__inner">
+      <div class="admin-panel__header">
+        <h2>🔧 Administration</h2>
+        <button class="admin-panel__close" id="adminClose" aria-label="Fermer le panneau admin">&times;</button>
+      </div>
+
+      <!-- Menu Upload -->
+      <div class="admin-panel__section">
+        <h3>📋 Menu de la Semaine</h3>
+        <p class="admin-panel__hint">Uploadez l'image du menu de la semaine (JPG/PNG)</p>
+        <label class="admin-upload-btn" for="menuUpload" tabindex="0">
+          📤 Choisir une image
+          <input type="file" id="menuUpload" accept="image/*" hidden />
+        </label>
+        <div class="admin-panel__preview" id="menuPreview"></div>
+        <button class="btn btn--sm btn--danger" id="menuClear" style="display:none;">🗑️ Supprimer le menu</button>
+      </div>
+
+      <!-- Gallery Upload -->
+      <div class="admin-panel__section">
+        <h3>📸 Galerie Photos</h3>
+        <p class="admin-panel__hint">Ajoutez des photos à la galerie (max 20 images)</p>
+        <label class="admin-upload-btn" for="galleryUpload" tabindex="0">
+          📤 Ajouter des photos
+          <input type="file" id="galleryUpload" accept="image/*" multiple hidden />
+        </label>
+        <div class="admin-gallery-list" id="adminGalleryList"></div>
+        <button class="btn btn--sm btn--danger" id="galleryClearAll" style="display:none;">🗑️ Supprimer toutes les photos ajoutées</button>
+      </div>
+
+
+    </div>
+  </div>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <img src="images/logo.png" alt="Queens" width="36" height="36" />
+          <span>Restaurant Queens</span>
+        </div>
+        <p class="footer__text">© 2026 Restaurant Queens · Diekirch, Luxembourg</p>
+        <p class="footer__text footer__text--sm">Cuisine portugaise traditionnelle · Grillades · Spécialités maison</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

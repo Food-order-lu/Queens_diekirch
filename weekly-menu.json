@@ -1,0 +1,100 @@
+{
+  "weekOf": "17 Mars – 23 Mars 2026",
+  "menuDuJour": {
+    "price": "14.90",
+    "includes": "Plat + Accompagnement"
+  },
+  "days": [
+    {
+      "day": "Lundi",
+      "date": "17 Mars",
+      "dishes": [
+        {
+          "name": "Ribs de porc",
+          "description": "Accompagnés de pommes de terre au four et salade verte",
+          "price": "14.90",
+          "tag": "🔥 Populaire"
+        }
+      ]
+    },
+    {
+      "day": "Mardi",
+      "date": "18 Mars",
+      "dishes": [
+        {
+          "name": "Fermé",
+          "description": "Nous sommes fermés le mardi. À demain !",
+          "price": null,
+          "tag": "🚪 Fermé"
+        }
+      ],
+      "closed": true
+    },
+    {
+      "day": "Mercredi",
+      "date": "19 Mars",
+      "dishes": [
+        {
+          "name": "Petites sardines grillées",
+          "description": "Servies avec riz à la tomate et salade",
+          "price": "14.90",
+          "tag": "🐟 Poisson"
+        }
+      ]
+    },
+    {
+      "day": "Jeudi",
+      "date": "20 Mars",
+      "dishes": [
+        {
+          "name": "Cassoulet façon Transmontana",
+          "description": "Haricots rouges, saucisses et viande de porc mijotés",
+          "price": "14.90",
+          "tag": "🍲 Tradition"
+        }
+      ]
+    },
+    {
+      "day": "Vendredi",
+      "date": "21 Mars",
+      "dishes": [
+        {
+          "name": "Tortellini à la crème de jambon",
+          "description": "Pâtes fraîches farcies, crème onctueuse au jambon",
+          "price": "14.90",
+          "tag": "🍝 Pâtes"
+        },
+        {
+          "name": "Pota façon Lagareiro",
+          "description": "Calamar grillé à l'huile d'olive et pommes de terre écrasées",
+          "price": "16.90",
+          "tag": "🐙 Fruits de mer"
+        }
+      ]
+    },
+    {
+      "day": "Samedi",
+      "date": "22 Mars",
+      "dishes": [
+        {
+          "name": "Choucroute garnie",
+          "description": "Choucroute traditionnelle avec saucisses et viande fumée",
+          "price": "18.90",
+          "tag": "⭐ Spécial Weekend"
+        }
+      ]
+    },
+    {
+      "day": "Dimanche",
+      "date": "23 Mars",
+      "dishes": [
+        {
+          "name": "Porcelet façon maison",
+          "description": "Cochon de lait rôti croustillant, légumes du marché",
+          "price": "19.90",
+          "tag": "👑 Spécial Dimanche"
+        }
+      ]
+    }
+  ]
+}
