@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Galerie | Restaurant Queens · Diekirch</title>
-  <meta name="description" content="Visionnez notre superbe galerie de plats et l'ambiance du Restaurant Queens à Diekirch." />
+  <title>Galerie Photos | Restaurant Queens · Diekirch</title>
+  <meta name="description" content="Découvrez notre galerie de plats traditionnels et notre ambiance chaleureuse au Restaurant Queens de Diekirch." />
   <link rel="icon" href="images/logo.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="index.css" />
 </head>
-<body class="page-galerie">
+<body class="page-gallery">
 
-  <header class="navbar" id="navbar">
+  <!-- ====== NAVIGATION ====== -->
+  <header class="navbar" id="navbar" role="banner">
     <div class="navbar__inner">
-      <a href="index.html" class="navbar__logo">
+      <a href="index.html" class="navbar__logo" aria-label="Restaurant Queens">
         <img src="images/logo.png" alt="Queens Logo" width="44" height="44" />
         <span class="navbar__brand">Queens</span>
       </a>
@@ -33,29 +34,49 @@
       </div>
     </div>
   </header>
+  <div class="nav-overlay" id="navOverlay"></div>
 
   <main>
-    <section class="gallery-section" id="galerie" style="padding-top: 140px;">
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+      <div class="page-hero__bg">
+        <img src="images/bacalhau.jpg" alt="Art culinaire Queens">
+      </div>
+      <div class="page-hero__overlay"></div>
+      <div class="page-hero__content animate-fadein">
+        <span class="page-hero__breadcrumb">Un plaisir pour les yeux</span>
+        <h1 class="page-hero__title">Galerie Photos</h1>
+      </div>
+    </section>
+
+    <!-- GALLERY GRID -->
+    <section class="gallery-section">
       <div class="container">
         <div class="section-header animate-fadein">
           <span class="section-header__crown">📸</span>
-          <h1 class="section-header__title">Inspirations & Délices</h1>
-          <p class="section-header__subtitle">Une expérience visuelle et gustative</p>
+          <h2 class="section-header__title">Nos Plats d'Excellence</h2>
+          <p class="section-header__subtitle">Une immersion visuelle au cœur de notre cuisine</p>
           <div class="section-header__divider"></div>
         </div>
 
-        <div class="gallery-mosaic animate-fadein" id="galleryGrid">
-          <!-- Gallery items rendered by JS -->
+        <!-- The items are injected by app.js (renderGallery()) -->
+        <div class="gallery-mosaic animate-fadein" id="galleryGrid" role="list" aria-label="Grille de photos">
+          <!-- Dynamically Injected -->
+        </div>
+
+        <div style="text-align: center; margin-top: 80px;" class="animate-fadein">
+          <p class="gallery-section__text">Découvrez encore plus de délices sur notre Facebook.</p>
+          <a href="https://www.facebook.com/profile.php?id=61586475113924" target="_blank" class="btn btn--facebook">Suivez-nous sur Facebook</a>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- LIGHTBOX (Needed for gallery) -->
-  <div class="lightbox" id="lightbox" hidden>
+  <!-- ====== LIGHTBOX ====== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" hidden>
     <button class="lightbox__close" id="lightboxClose">&times;</button>
-    <button class="lightbox__prev" id="lightboxPrev">&#8249;</button>
-    <button class="lightbox__next" id="lightboxNext">&#8250;</button>
+    <button class="lightbox__prev" id="lightboxPrev" aria-label="Précédente">&#8249;</button>
+    <button class="lightbox__next" id="lightboxNext" aria-label="Suivante">&#8250;</button>
     <div class="lightbox__content">
       <img id="lightboxImg" src="" alt="" />
       <p class="lightbox__caption" id="lightboxCaption"></p>

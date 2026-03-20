@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Notre Menu | Restaurant Queens · Diekirch</title>
-  <meta name="description" content="Découvrez le menu de la semaine et nos spécialités au Restaurant Queens à Diekirch." />
+  <meta name="description" content="Découvrez le menu de la semaine et nos spécialités au Restaurant Queens à Diekirch. Cuisine portugaise et grillades." />
   <link rel="icon" href="images/logo.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,27 +34,58 @@
       </div>
     </div>
   </header>
+  <div class="nav-overlay" id="navOverlay"></div>
 
   <main>
-    <section class="menu-section" style="padding-top: 140px;">
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+      <div class="page-hero__bg">
+        <img src="images/steak-roquette.jpg" alt="Menu Queens Background">
+      </div>
+      <div class="page-hero__overlay"></div>
+      <div class="page-hero__content animate-fadein">
+        <span class="page-hero__breadcrumb">Saveurs Authentiques</span>
+        <h1 class="page-hero__title">Notre Menu</h1>
+      </div>
+    </section>
+
+    <!-- MENU SECTION -->
+    <section class="menu-section">
       <div class="container">
         <div class="section-header animate-fadein">
-          <span class="section-header__crown">👑</span>
-          <h1 class="section-header__title">Menu de la Semaine</h1>
-          <p class="section-header__subtitle">Une cuisine authentique, chaque jour renouvelée</p>
+          <span class="section-header__crown">📋</span>
+          <h2 class="section-header__title">Le Menu de la Semaine</h2>
+          <p class="section-header__subtitle">Retrouvez nos suggestions du moment, cuisinées avec passion</p>
           <div class="section-header__divider"></div>
         </div>
 
         <div class="menu-display animate-fadein" id="menuDisplay">
           <div class="menu-display__placeholder" id="menuPlaceholder">
             <p>📋 Le menu de la semaine sera bientôt affiché.</p>
-            <p>Consultez notre <a href="https://www.facebook.com/profile.php?id=61586475113924" target="_blank">page Facebook</a>.</p>
+            <p>Consultez notre <a href="https://www.facebook.com/profile.php?id=61586475113924" target="_blank">page Facebook</a> pour les dernières mises à jour.</p>
           </div>
-          <img id="menuImage" class="menu-display__image" src="" alt="Menu" style="display:none;" />
+          <!-- Menu image is clickable to open in lightbox -->
+          <img id="menuImage" class="menu-display__image" src="" alt="Menu de la Semaine" style="display:none; cursor: pointer;" title="Cliquez pour agrandir" />
+        </div>
+
+        <div style="text-align: center; margin-top: 60px;" class="animate-fadein">
+          <p class="menu-section__info">Besoin de réserver ? Appelez-nous au <a href="tel:+352691187077"><strong>+352 691 187 077</strong></a></p>
+          <a href="contact.html" class="btn btn--outline" style="margin-top: 20px;">Réserver une table désormais</a>
         </div>
       </div>
     </section>
   </main>
+
+  <!-- ====== LIGHTBOX (JS needed) ====== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" hidden>
+    <button class="lightbox__close" id="lightboxClose">&times;</button>
+    <button class="lightbox__prev" id="lightboxPrev">&#8249;</button>
+    <button class="lightbox__next" id="lightboxNext">&#8250;</button>
+    <div class="lightbox__content">
+      <img id="lightboxImg" src="" alt="" />
+      <p class="lightbox__caption" id="lightboxCaption"></p>
+    </div>
+  </div>
 
   <footer class="footer">
     <div class="container">

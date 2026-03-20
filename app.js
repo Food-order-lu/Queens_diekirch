@@ -1,27 +1,41 @@
 /* ====================================================
    RESTAURANT QUEENS · DIEKIRCH
-   App Logic: Admin Panel, Gallery, Lightbox, GloriaFood
+   App Logic: Admin Panel, Gallery, Lightbox, Navigation
    ==================================================== */
 
 (function () {
   'use strict';
 
   // ═══════════════════════════════════════════════
-  // STORAGE KEYS
+  // CONSTANTS & CONFIG
   // ═══════════════════════════════════════════════
   const STORAGE = {
     MENU_IMAGE: 'queens_menu_image',
     GALLERY_ITEMS: 'queens_gallery_items'
   };
 
-  // Default gallery images (shipped with the site)
   const DEFAULT_GALLERY = [
-    { src: 'images/carpaccio.jpg',      label: 'Carpaccio de Bœuf' },
-    { src: 'images/bacalhau.jpg',       label: 'Bacalhau à Portuguesa' },
-    { src: 'images/batatas.jpg',        label: 'Bacalhau à Brás' },
-    { src: 'images/steak-roquette.jpg', label: 'Steak à la Roquette' }
+    { src: 'images/suckling-pig.png',    label: 'Cochon de lait (Leitão)' },
+    { src: 'images/churrasco.png',       label: 'Grillades Mixtes' },
+    { src: 'images/sardines.png',        label: 'Sardines Grillées' },
+    { src: 'images/ribs.png',            label: 'Travers de Porc' },
+    { src: 'images/cassoulet.png',       label: 'Feijoada Royale' },
+    { src: 'images/bacalhau.jpg',        label: 'Bacalhau à Portuguesa' },
+    { src: 'images/batatas.jpg',         label: 'Bacalhau à Brás' },
+    { src: 'images/carpaccio.jpg',       label: 'Carpaccio de Bœuf' },
+    { src: 'images/steak-roquette.jpg',  label: 'Steak Queens' }
   ];
 
+  // Global state for gallery/lightbox
+  let galleryData = [];
+  let currentIndex = 0;
+  let previousFocus = null;
+
+  // ═══════════════════════════════════════════════
+  // UTILS
+  // ═══════════════════════════════════════════════
+  const $ = (id) => document.getElementById(id);
+  const $$ = (selector) => document.querySelectorAll(selector);
 
   // ═══════════════════════════════════════════════
   // GALLERY RENDERER
@@ -33,11 +47,10 @@
   }
 
   function renderGallery() {
-    const grid = document.getElementById('galleryGrid');
-    if (!grid) return; // Not on gallery page or landing page with gallery
+    const grid = $('galleryGrid');
+    if (!grid) return;
+    
     const items = getGalleryItems();
-
-    // Layout classes for visual variety
     const layoutClasses = ['gallery-item--tall', '', '', 'gallery-item--wide', '', 'gallery-item--tall'];
 
     grid.innerHTML = items.map((item, i) => {
@@ -53,55 +66,36 @@
       `;
     }).join('');
 
-    // Re-bind lightbox after render
     initLightbox();
   }
-
 
   // ═══════════════════════════════════════════════
   // MENU IMAGE
   // ═══════════════════════════════════════════════
   function loadMenuImage() {
-    const menuImage = document.getElementById('menuImage');
-    const menuPlaceholder = document.getElementById('menuPlaceholder');
-    if (!menuImage || !menuPlaceholder) return;
+    const menuImg = $('menuImage');
+    const menuPlaceholder = $('menuPlaceholder');
+    if (!menuImg || !menuPlaceholder) return;
+    
     const stored = localStorage.getItem(STORAGE.MENU_IMAGE);
-
     if (stored) {
-      menuImage.src = stored;
-      menuImage.style.display = 'block';
+      menuImg.src = stored;
+      menuImg.style.display = 'block';
       menuPlaceholder.style.display = 'none';
     } else {
-      menuImage.style.display = 'none';
+      menuImg.style.display = 'none';
       menuPlaceholder.style.display = 'block';
     }
   }
 
-
   // ═══════════════════════════════════════════════
-  // LIGHTBOX
+  // LIGHTBOX LOGIC
   // ═══════════════════════════════════════════════
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightboxImg');
-  const lightboxCaption = document.getElementById('lightboxCaption');
-  const lightboxClose = document.getElementById('lightboxClose');
-  const lightboxPrev = document.getElementById('lightboxPrev');
-  const lightboxNext = document.getElementById('lightboxNext');
-
-  if (lightbox) {
-    lightboxClose.addEventListener('click', closeLightbox);
-    lightboxPrev.addEventListener('click', prevImage);
-    lightboxNext.addEventListener('click', nextImage);
-    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-  }
-
-  let currentIndex = 0;
-  let previousFocus = null;
-  let galleryData = [];
-
   function initLightbox() {
-    if (!lightbox) return;
-    const galleryItems = document.querySelectorAll('.gallery-item');
+    const lb = $('lightbox');
+    if (!lb) return;
+
+    const galleryItems = $$('.gallery-item');
     galleryData = Array.from(galleryItems).map(item => ({
       src: item.querySelector('img').src,
       alt: item.querySelector('img').alt,
@@ -109,32 +103,36 @@
     }));
 
     galleryItems.forEach((item, index) => {
-      item.addEventListener('click', () => openLightbox(index));
-      item.addEventListener('keydown', (e) => {
+      item.onclick = () => openLightbox(index);
+      item.onkeydown = (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           openLightbox(index);
         }
-      });
+      };
     });
   }
 
   function openLightbox(index) {
+    const lb = $('lightbox');
+    if (!lb) return;
     currentIndex = index;
     previousFocus = document.activeElement;
     updateLightbox();
-    lightbox.hidden = false;
-    void lightbox.offsetWidth;
-    lightbox.classList.add('active');
+    lb.hidden = false;
+    void lb.offsetWidth;
+    lb.classList.add('active');
     document.body.style.overflow = 'hidden';
-    lightboxClose.focus();
+    $('lightboxClose')?.focus();
   }
 
   function closeLightbox() {
-    lightbox.classList.remove('active');
+    const lb = $('lightbox');
+    if (!lb) return;
+    lb.classList.remove('active');
     document.body.style.overflow = '';
     setTimeout(() => {
-      lightbox.hidden = true;
+      lb.hidden = true;
       if (previousFocus) previousFocus.focus();
     }, 400);
   }
@@ -142,132 +140,65 @@
   function updateLightbox() {
     const item = galleryData[currentIndex];
     if (!item) return;
-    lightboxImg.src = item.src;
-    lightboxImg.alt = item.alt;
-    lightboxCaption.textContent = item.label;
+    const lbImg = $('lightboxImg');
+    const lbCap = $('lightboxCaption');
+    if (lbImg) lbImg.src = item.src;
+    if (lbImg) lbImg.alt = item.alt;
+    if (lbCap) lbCap.textContent = item.label;
+
+    // Reset visibility of markers if multiple
+    if ($('lightboxPrev')) $('lightboxPrev').style.display = galleryData.length > 1 ? 'block' : 'none';
+    if ($('lightboxNext')) $('lightboxNext').style.display = galleryData.length > 1 ? 'block' : 'none';
   }
 
   function nextImage() {
+    if (galleryData.length <= 1) return;
     currentIndex = (currentIndex + 1) % galleryData.length;
     updateLightbox();
   }
 
   function prevImage() {
+    if (galleryData.length <= 1) return;
     currentIndex = (currentIndex - 1 + galleryData.length) % galleryData.length;
     updateLightbox();
   }
 
-  // Removed direct listeners, moved into check above
-  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  // ═══════════════════════════════════════════════
+  // NAVIGATION & UI
+  // ═══════════════════════════════════════════════
+  function initNavigation() {
+    const navbar = $('navbar');
+    const navBurger = $('navBurger');
+    const navMenu = $('navMenu');
+    const navOverlay = $('navOverlay');
+    const navLinks = $$('.navbar__link');
 
-  document.addEventListener('keydown', (e) => {
-    if (!lightbox || lightbox.hidden) return;
-    switch (e.key) {
-      case 'Escape': closeLightbox(); break;
-      case 'ArrowLeft': prevImage(); break;
-      case 'ArrowRight': nextImage(); break;
+    if (!navbar) return;
+
+    const toggleNav = (open) => {
+      const isOpening = open !== undefined ? open : !navMenu.classList.contains('open');
+      navMenu.classList.toggle('open', isOpening);
+      navBurger.classList.toggle('open', isOpening);
+      navOverlay.classList.toggle('active', isOpening);
+      document.body.style.overflow = isOpening ? 'hidden' : '';
+    };
+
+    if (navBurger && navMenu && navOverlay) {
+      navBurger.onclick = () => toggleNav();
+      navOverlay.onclick = () => toggleNav(false);
+      navLinks.forEach(link => link.onclick = () => toggleNav(false));
     }
-  });
 
-  // Touch swipe
-  if (lightbox) {
-    let touchStartX = 0;
-    lightbox.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
-    lightbox.addEventListener('touchend', (e) => {
-      const diff = e.changedTouches[0].screenX - touchStartX;
-      if (Math.abs(diff) > 60) { diff > 0 ? prevImage() : nextImage(); }
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
     }, { passive: true });
   }
 
-  // Also let menu image open in lightbox
-  if (menuImage && lightbox) {
-    menuImage.addEventListener('click', () => {
-      previousFocus = document.activeElement;
-      lightboxImg.src = menuImage.src;
-      lightboxImg.alt = menuImage.alt;
-      lightboxCaption.textContent = 'Menu de la Semaine';
-      lightbox.hidden = false;
-      void lightbox.offsetWidth;
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      // Hide prev/next for single image
-      if (lightboxPrev) lightboxPrev.style.display = 'none';
-      if (lightboxNext) lightboxNext.style.display = 'none';
-      lightboxClose.focus();
-    });
-  }
-
-
   // ═══════════════════════════════════════════════
-  // NAVBAR
+  // ADMIN PANEL
   // ═══════════════════════════════════════════════
-  const navbar = document.getElementById('navbar');
-  const navBurger = document.getElementById('navBurger');
-  const navMenu = document.getElementById('navMenu');
-  const navOverlay = document.getElementById('navOverlay');
-  const navLinks = document.querySelectorAll('[data-nav]');
-
-  let ticking = false;
-  function onScroll() {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        navbar.classList.toggle('scrolled', window.scrollY > 60);
-        updateActiveSection();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  function updateActiveSection() {
-    const sections = document.querySelectorAll('section[id]');
-    const scrollPos = window.scrollY + 100;
-    sections.forEach(section => {
-      const top = section.offsetTop;
-      const height = section.offsetHeight;
-      const id = section.getAttribute('id');
-      if (scrollPos >= top && scrollPos < top + height) {
-        navLinks.forEach(link => {
-          link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
-        });
-      }
-    });
-  }
-
-  function openMobileNav() {
-    navMenu.classList.add('open');
-    navBurger.classList.add('open');
-    navOverlay.classList.add('active');
-    navOverlay.setAttribute('aria-hidden', 'false');
-    navBurger.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeMobileNav() {
-    navMenu.classList.remove('open');
-    navBurger.classList.remove('open');
-    navOverlay.classList.remove('active');
-    navOverlay.setAttribute('aria-hidden', 'true');
-    navBurger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  }
-
-  navBurger.addEventListener('click', () => {
-    navMenu.classList.contains('open') ? closeMobileNav() : openMobileNav();
-  });
-
-  navOverlay.addEventListener('click', closeMobileNav);
-
-  navLinks.forEach(link => {
-    link.addEventListener('click', closeMobileNav);
-  });
-
-
-  // ── Admin Panel Logic ──
   function ensureAdminPanelUI() {
-    if (document.getElementById('adminPanel')) return;
-
+    if ($('adminPanel')) return;
     const panel = document.createElement('div');
     panel.id = 'adminPanel';
     panel.className = 'admin-panel';
@@ -285,7 +216,7 @@
             <input type="file" id="menuUpload" accept="image/*" hidden />
           </label>
           <div class="admin-panel__preview" id="menuPreview"></div>
-          <button class="btn btn--sm btn--danger" id="menuClear" style="display:none;">🗑️ Effacer</button>
+          <button class="btn btn--sm btn--danger" id="menuClear" style="display:none;">🗑️ Effacer le menu</button>
         </div>
         <div class="admin-panel__section">
           <h3>📸 Galerie Photos</h3>
@@ -293,7 +224,7 @@
             <input type="file" id="galleryUpload" accept="image/*" multiple hidden />
           </label>
           <div class="admin-gallery-list" id="adminGalleryList"></div>
-          <button class="btn btn--sm btn--danger" id="galleryClearAll" style="display:none;">🗑️ Tout effacer</button>
+          <button class="btn btn--sm btn--danger" id="galleryClearAll" style="display:none;">🗑️ Tout supprimer</button>
         </div>
       </div>
     `;
@@ -301,139 +232,139 @@
   }
 
   function setupAdminEvents() {
-    const adminPanel = document.getElementById('adminPanel');
-    const adminClose = document.getElementById('adminClose');
     const logo = document.querySelector('.navbar__logo');
+    const adminPanel = $('adminPanel');
+    const adminClose = $('adminClose');
 
     if (!logo || !adminPanel) return;
 
-    let logoClicks = 0;
-    let logoTimer;
-
-    logo.addEventListener('click', (e) => {
-      logoClicks++;
-      if (logoClicks === 5) {
-        const pass = prompt('Entrez le mot de passe administration :');
-        if (pass === 'queens') { 
+    let clicks = 0;
+    let timer;
+    logo.onclick = () => {
+      clicks++;
+      if (clicks === 5) {
+        const pass = prompt('Mot de passe :');
+        if (pass === 'queens') {
           adminPanel.classList.add('open');
           loadAdminState();
         }
-        logoClicks = 0;
+        clicks = 0;
       }
-      clearTimeout(logoTimer);
-      logoTimer = setTimeout(() => { logoClicks = 0; }, 2000);
-    });
+      clearTimeout(timer);
+      timer = setTimeout(() => clicks = 0, 2000);
+    };
 
-    adminClose.addEventListener('click', () => adminPanel.classList.remove('open'));
+    if (adminClose) adminClose.onclick = () => adminPanel.classList.remove('open');
 
-    // Re-bind dynamic uploads
-    document.getElementById('menuUpload').addEventListener('change', handleMenuUpload);
-    document.getElementById('menuClear').addEventListener('click', clearMenu);
-    document.getElementById('galleryUpload').addEventListener('change', handleGalleryUpload);
-    document.getElementById('galleryClearAll').addEventListener('click', clearGallery);
-  }
+    // Setup input listeners
+    const menuUp = $('menuUpload');
+    const menuClr = $('menuClear');
+    const galleryUp = $('galleryUpload');
+    const galleryClr = $('galleryClearAll');
 
-  function handleMenuUpload(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      localStorage.setItem(STORAGE.MENU_IMAGE, ev.target.result);
+    if (menuUp) menuUp.onchange = (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        localStorage.setItem(STORAGE.MENU_IMAGE, ev.target.result);
+        loadMenuImage();
+        loadAdminState();
+      };
+      reader.readAsDataURL(file);
+    };
+
+    if (menuClr) menuClr.onclick = () => {
+      localStorage.removeItem(STORAGE.MENU_IMAGE);
       loadMenuImage();
       loadAdminState();
     };
-    reader.readAsDataURL(file);
-  }
 
-  function clearMenu() {
-    localStorage.removeItem(STORAGE.MENU_IMAGE);
-    loadMenuImage();
-    loadAdminState();
-  }
+    if (galleryUp) galleryUp.onchange = (e) => {
+      const files = Array.from(e.target.files);
+      const stored = localStorage.getItem(STORAGE.GALLERY_ITEMS);
+      const items = stored ? JSON.parse(stored) : [];
+      let loaded = 0;
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          const name = file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+          items.push({ src: ev.target.result, label: name.charAt(0).toUpperCase() + name.slice(1) });
+          if (++loaded === files.length) {
+            localStorage.setItem(STORAGE.GALLERY_ITEMS, JSON.stringify(items));
+            renderGallery();
+            loadAdminState();
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    };
 
-  function handleGalleryUpload(e) {
-    const files = Array.from(e.target.files);
-    const stored = localStorage.getItem(STORAGE.GALLERY_ITEMS);
-    const items = stored ? JSON.parse(stored) : [];
-    let loaded = 0;
-    files.forEach(file => {
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        const name = file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
-        items.push({ src: ev.target.result, label: name.charAt(0).toUpperCase() + name.slice(1) });
-        if (++loaded === files.length) {
-          localStorage.setItem(STORAGE.GALLERY_ITEMS, JSON.stringify(items));
-          renderGallery();
-          loadAdminState();
-        }
-      };
-      reader.readAsDataURL(file);
-    });
-  }
-
-  function clearGallery() {
-    localStorage.removeItem(STORAGE.GALLERY_ITEMS);
-    renderGallery();
-    loadAdminState();
-  }
-
-  function removeGalleryItem(index) {
-    const stored = localStorage.getItem(STORAGE.GALLERY_ITEMS);
-    const items = stored ? JSON.parse(stored) : [];
-    items.splice(index, 1);
-    localStorage.setItem(STORAGE.GALLERY_ITEMS, JSON.stringify(items));
-    renderGallery();
-    loadAdminState();
+    if (galleryClr) galleryClr.onclick = () => {
+      if (confirm('Supprimer toutes vos photos ajoutées ?')) {
+        localStorage.removeItem(STORAGE.GALLERY_ITEMS);
+        renderGallery();
+        loadAdminState();
+      }
+    };
   }
 
   function loadAdminState() {
-    const menuPreview = document.getElementById('menuPreview');
-    const menuClear = document.getElementById('menuClear');
-    const adminGalleryList = document.getElementById('adminGalleryList');
-    const galleryClearAll = document.getElementById('galleryClearAll');
+    const menuPrev = $('menuPreview');
+    const menuClr = $('menuClear');
+    const galleryList = $('adminGalleryList');
+    const galleryClr = $('galleryClearAll');
 
-    if (!menuPreview) return; // UI not ready
+    if (!menuPrev) return;
 
-    // Menu preview
     const menuData = localStorage.getItem(STORAGE.MENU_IMAGE);
     if (menuData) {
-      menuPreview.innerHTML = `<img src="${menuData}" alt="Aperçu menu" />`;
-      menuClear.style.display = 'inline-flex';
+      menuPrev.innerHTML = `<img src="${menuData}" alt="Menu Preview" />`;
+      if (menuClr) menuClr.style.display = 'inline-flex';
     } else {
-      menuPreview.innerHTML = '<p style="color: var(--gray-400); font-size: 0.85rem;">Aucun menu uploadé</p>';
-      menuClear.style.display = 'none';
+      menuPrev.innerHTML = '<p>Aucun menu.</p>';
+      if (menuClr) menuClr.style.display = 'none';
     }
 
-    // Gallery list
     const stored = localStorage.getItem(STORAGE.GALLERY_ITEMS);
     const items = stored ? JSON.parse(stored) : [];
     if (items.length > 0) {
-      adminGalleryList.innerHTML = items.map((item, i) => `
+      galleryList.innerHTML = items.map((item, i) => `
         <div class="admin-gallery-item">
           <img src="${item.src}" alt="${item.label}" />
-          <button class="admin-gallery-item__remove" data-remove="${i}" aria-label="Supprimer ${item.label}">✕</button>
+          <button class="remove-item" data-index="${i}">✕</button>
         </div>
       `).join('');
-      galleryClearAll.style.display = 'inline-flex';
-
-      adminGalleryList.querySelectorAll('[data-remove]').forEach(btn => {
-        btn.addEventListener('click', () => removeGalleryItem(parseInt(btn.dataset.remove)));
+      if (galleryClr) galleryClr.style.display = 'inline-flex';
+      
+      galleryList.querySelectorAll('.remove-item').forEach(btn => {
+        btn.onclick = () => {
+          const idx = parseInt(btn.dataset.index);
+          const current = JSON.parse(localStorage.getItem(STORAGE.GALLERY_ITEMS));
+          current.splice(idx, 1);
+          localStorage.setItem(STORAGE.GALLERY_ITEMS, JSON.stringify(current));
+          renderGallery();
+          loadAdminState();
+        };
       });
     } else {
-      adminGalleryList.innerHTML = '<p style="color: var(--gray-400); font-size: 0.85rem;">Aucune photo admin ajoutée</p>';
-      galleryClearAll.style.display = 'none';
+      galleryList.innerHTML = '<p>Aucune photo admin.</p>';
+      if (galleryClr) galleryClr.style.display = 'none';
     }
-
-
   }
 
-
-
-
   // ═══════════════════════════════════════════════
-  // SCROLL ANIMATIONS
+  // INITIALIZATION
   // ═══════════════════════════════════════════════
-  function initScrollAnimations() {
+  function init() {
+    ensureAdminPanelUI();
+    initNavigation();
+    loadMenuImage();
+    renderGallery();
+    setupAdminEvents();
+
+    // Scroll Animations
+    const animEls = $$('.animate-fadein');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -441,22 +372,52 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    }, { threshold: 0.05 });
+    
+    animEls.forEach(el => {
+      observer.observe(el);
+      // Fallback: If not visible in 1.5s, force it
+      setTimeout(() => el.classList.add('visible'), 1500);
+    });
 
-    document.querySelectorAll('.animate-fadein').forEach(el => observer.observe(el));
+    // Lightbox Global Events
+    const lbClose = $('lightboxClose');
+    const lbPrev = $('lightboxPrev');
+    const lbNext = $('lightboxNext');
+    if (lbClose) lbClose.onclick = closeLightbox;
+    if (lbPrev) lbPrev.onclick = prevImage;
+    if (lbNext) lbNext.onclick = nextImage;
+
+    document.onkeydown = (e) => {
+      const lb = $('lightbox');
+      if (!lb || lb.hidden) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextImage();
+    };
+
+    // Menu image also opens in lightbox
+    const mImg = $('menuImage');
+    const lb = $('lightbox');
+    if (mImg && lb) {
+      mImg.onclick = () => {
+        const lbImg = $('lightboxImg');
+        const lbCap = $('lightboxCaption');
+        if (lbImg) lbImg.src = mImg.src;
+        if (lbCap) lbCap.textContent = 'Menu de la Semaine';
+        lb.hidden = false;
+        lb.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        if ($('lightboxPrev')) $('lightboxPrev').style.display = 'none';
+        if ($('lightboxNext')) $('lightboxNext').style.display = 'none';
+      };
+    }
   }
 
-
-  // ═══════════════════════════════════════════════
-  // INIT
-  // ═══════════════════════════════════════════════
-  document.addEventListener('DOMContentLoaded', () => {
-    ensureAdminPanelUI();
-    setupAdminEvents();
-    loadMenuImage();
-    renderGallery();
-    initScrollAnimations();
-    onScroll();
-  });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 
 })();
