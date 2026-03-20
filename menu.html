@@ -60,12 +60,16 @@
         </div>
 
         <div class="menu-display animate-fadein" id="menuDisplay">
-          <div class="menu-display__placeholder" id="menuPlaceholder">
+          <!-- Multi-mode menu: Grid (JSON) and Image (Admin) -->
+          <div id="weeklyMenuGrid" class="weekly-menu-grid"></div>
+
+          <!-- If admin uploaded a menu image, it can show below or instead -->
+          <img id="menuImage" class="menu-display__image" src="" alt="Menu de la Semaine – Restaurant Queens" style="display:none; margin-top: 40px;" />
+
+          <div class="menu-display__placeholder" id="menuPlaceholder" style="display:none;">
             <p>📋 Le menu de la semaine sera bientôt affiché.</p>
-            <p>Consultez notre <a href="https://www.facebook.com/profile.php?id=61586475113924" target="_blank">page Facebook</a> pour les dernières mises à jour.</p>
+            <p>Consultez notre <a href="https://www.facebook.com/profile.php?id=61586475113924" target="_blank" rel="noopener noreferrer">page Facebook</a> pour les dernières mises à jour.</p>
           </div>
-          <!-- Menu image is clickable to open in lightbox -->
-          <img id="menuImage" class="menu-display__image" src="" alt="Menu de la Semaine" style="display:none; cursor: pointer;" title="Cliquez pour agrandir" />
         </div>
 
         <div style="text-align: center; margin-top: 60px;" class="animate-fadein">

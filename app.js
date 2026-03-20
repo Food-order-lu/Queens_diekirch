@@ -11,7 +11,25 @@
   // ═══════════════════════════════════════════════
   const STORAGE = {
     MENU_IMAGE: 'queens_menu_image',
-    GALLERY_ITEMS: 'queens_gallery_items'
+    GALLERY_ITEMS: 'queens_gallery_items',
+    WEEKLY_MENU_JSON: 'queens_weekly_menu_json'
+  };
+
+  const API = {
+    WEEKLY_MENU: 'weekly-menu.json'
+  };
+
+  const DEFAULT_MENU = {
+    weekOf: "17 Mars – 23 Mars 2026",
+    days: [
+      { day: "Lundi", date: "17 Mars", dishes: [{ name: "Ribs de porc", description: "Accompagnés de pommes de terre au four et salade verte", price: "14.90", tag: "🔥 Populaire" }] },
+      { day: "Mardi", date: "18 Mars", dishes: [{ name: "Fermé", description: "Nous sommes fermés le mardi. À demain !", price: null, tag: "🚪 Fermé" }], closed: true },
+      { day: "Mercredi", date: "19 Mars", dishes: [{ name: "Petites sardines grillées", description: "Servies avec riz à la tomate et salade", price: "14.90", tag: "🐟 Poisson" }] },
+      { day: "Jeudi", date: "20 Mars", dishes: [{ name: "Cassoulet façon Transmontana", description: "Haricots rouges, saucisses et viande de porc mijotés", price: "14.90", tag: "🍲 Tradition" }] },
+      { day: "Vendredi", date: "21 Mars", dishes: [{ name: "Tortellini à la crème de jambon", price: "14.90", tag: "🍝 Pâtes" }, { name: "Pota façon Lagareiro", price: "16.90", tag: "🐙 Fruits de mer" }] },
+      { day: "Samedi", date: "22 Mars", dishes: [{ name: "Choucroute garnie", description: "Choucroute traditionnelle avec saucisses et viande fumée", price: "18.90", tag: "⭐ Spécial Weekend" }] },
+      { day: "Dimanche", date: "23 Mars", dishes: [{ name: "Porcelet façon maison", description: "Cochon de lait rôti croustillant, légumes du marché", price: "19.90", tag: "👑 Spécial Dimanche" }] }
+    ]
   };
 
   const DEFAULT_GALLERY = [
@@ -30,6 +48,7 @@
   let galleryData = [];
   let currentIndex = 0;
   let previousFocus = null;
+  let scrollObserver = null;
 
   // ═══════════════════════════════════════════════
   // UTILS
@@ -75,6 +94,7 @@
   function loadMenuImage() {
     const menuImg = $('menuImage');
     const menuPlaceholder = $('menuPlaceholder');
+    const weeklyGrid = $('weeklyMenuGrid');
     if (!menuImg || !menuPlaceholder) return;
     
     const stored = localStorage.getItem(STORAGE.MENU_IMAGE);
@@ -84,7 +104,12 @@
       menuPlaceholder.style.display = 'none';
     } else {
       menuImg.style.display = 'none';
-      menuPlaceholder.style.display = 'block';
+      // Only show placeholder if the grid is ALSO empty or doesn't exist
+      if (!weeklyGrid || weeklyGrid.children.length === 0) {
+        menuPlaceholder.style.display = 'block';
+      } else {
+        menuPlaceholder.style.display = 'none';
+      }
     }
   }
 
@@ -353,32 +378,105 @@
     }
   }
 
+  /* ── Weekly Menu ── */
+  async function fetchWeeklyMenu() {
+    const grid = $('weeklyMenuGrid');
+    if (!grid) return;
+
+    try {
+      // 1. Prioritize local storage (admin edits)
+      let data = null;
+      const stored = localStorage.getItem(STORAGE.WEEKLY_MENU_JSON);
+      
+      if (stored) {
+        data = JSON.parse(stored);
+      } else {
+        // 2. Try fetching the latest JSON
+        // Using a try/catch specifically for the fetch to catch CORS/file: errors
+        try {
+          const response = await fetch(API.WEEKLY_MENU);
+          if (response.ok) {
+            data = await response.json();
+          }
+        } catch (fErr) {
+          console.log('Fetch skipped or failed (likely CORS/file), using default.');
+        }
+      }
+
+      // 3. Final fallback to embedded DEFAULT_MENU
+      const activeData = data || DEFAULT_MENU;
+      
+      if (activeData && activeData.days) {
+        renderWeeklyMenu(activeData);
+      }
+      loadMenuImage();
+    } catch (err) {
+      console.warn('Erreur chargement menu JSON:', err);
+      loadMenuImage();
+    }
+  }
+
+  function renderWeeklyMenu(data) {
+    const grid = $('weeklyMenuGrid');
+    if (!grid) return;
+
+    grid.innerHTML = data.days.map(day => `
+      <div class="day-card ${day.closed ? 'day-card--closed' : ''} animate-fadein">
+        <div class="day-card__header">
+          <div class="day-card__name">${day.day}</div>
+          <div class="day-card__date">${day.date}</div>
+        </div>
+        <div class="day-card__menu">
+          ${day.dishes && day.dishes.length > 0 ? day.dishes.map(dish => `
+            <div class="dish-item">
+              ${dish.tag ? `<span class="dish-item__tag">${dish.tag}</span>` : ''}
+              <div class="dish-item__name">${dish.name}</div>
+              ${dish.description ? `<div class="dish-item__desc">${dish.description}</div>` : ''}
+              ${dish.price ? `<div class="dish-item__price">${dish.price} €</div>` : ''}
+            </div>
+          `).join('') : '<div class="dish-item__desc">Fermé</div>'}
+        </div>
+      </div>
+    `).join('');
+    
+    // Observe the newly added cards
+    if (scrollObserver) {
+      grid.querySelectorAll('.animate-fadein').forEach(el => scrollObserver.observe(el));
+    }
+  }
+
+  // ═══════════════════════════════════════════════
+  // ANIMATION UTILS
+  // ═══════════════════════════════════════════════
+  function initScrollAnimations() {
+    scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          scrollObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05 });
+
+    const animEls = $$('.animate-fadein');
+    animEls.forEach(el => {
+      scrollObserver.observe(el);
+      // Fallback: If not visible in 2s, force it
+      setTimeout(() => el.classList.add('visible'), 2000);
+    });
+  }
+
   // ═══════════════════════════════════════════════
   // INITIALIZATION
   // ═══════════════════════════════════════════════
   function init() {
     ensureAdminPanelUI();
     initNavigation();
+    initScrollAnimations();
     loadMenuImage();
     renderGallery();
     setupAdminEvents();
-
-    // Scroll Animations
-    const animEls = $$('.animate-fadein');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.05 });
-    
-    animEls.forEach(el => {
-      observer.observe(el);
-      // Fallback: If not visible in 1.5s, force it
-      setTimeout(() => el.classList.add('visible'), 1500);
-    });
+    fetchWeeklyMenu();
 
     // Lightbox Global Events
     const lbClose = $('lightboxClose');

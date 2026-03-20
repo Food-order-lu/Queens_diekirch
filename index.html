@@ -56,7 +56,7 @@
         <p class="hero__subtitle">Cuisine Portugaise & Grillades · Diekirch</p>
         <p class="hero__tagline">Tradition, saveurs et passion depuis le cœur du Luxembourg</p>
         <div class="hero__cta">
-          <a href="menu.html" class="btn btn--primary" aria-label="Voir le menu">📋 Menu de la Semaine</a>
+          <a href="#menu" class="btn btn--primary" aria-label="Voir le menu">📋 Menu de la Semaine</a>
           <a href="contact.html" class="btn btn--outline" aria-label="Nous contacter">📍 Nous Trouver</a>
         </div>
       </div>
@@ -78,12 +78,16 @@
         </div>
 
         <div class="menu-display animate-fadein" id="menuDisplay">
-          <!-- If admin uploaded a menu image, show it here -->
-          <div class="menu-display__placeholder" id="menuPlaceholder">
+          <!-- Multi-mode menu: Grid (JSON) and Image (Admin) -->
+          <div id="weeklyMenuGrid" class="weekly-menu-grid"></div>
+
+          <!-- If admin uploaded a menu image, it can show below or instead -->
+          <img id="menuImage" class="menu-display__image" src="" alt="Menu de la Semaine – Restaurant Queens" style="display:none; margin-top: 40px;" />
+
+          <div class="menu-display__placeholder" id="menuPlaceholder" style="display:none;">
             <p>📋 Le menu de la semaine sera bientôt affiché.</p>
             <p>Consultez notre <a href="https://www.facebook.com/profile.php?id=61586475113924" target="_blank" rel="noopener noreferrer">page Facebook</a> pour les dernières mises à jour.</p>
           </div>
-          <img id="menuImage" class="menu-display__image" src="" alt="Menu de la Semaine – Restaurant Queens" style="display:none;" />
         </div>
         <div style="text-align: center; margin-top: 40px;">
           <a href="menu.html" class="btn btn--outline btn--sm">Voir le menu complet</a>
