@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notre Menu | Restaurant Queens · Diekirch</title>
+  <meta name="description" content="Découvrez le menu de la semaine et nos spécialités au Restaurant Queens à Diekirch." />
+  <link rel="icon" href="images/logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body class="page-menu">
+
+  <!-- ====== NAVIGATION ====== -->
+  <header class="navbar" id="navbar" role="banner">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo" aria-label="Restaurant Queens">
+        <img src="images/logo.png" alt="Queens Logo" width="44" height="44" />
+        <span class="navbar__brand">Queens</span>
+      </a>
+      <nav class="navbar__nav" id="navMenu">
+        <ul class="navbar__list">
+          <li><a href="index.html" class="navbar__link">Accueil</a></li>
+          <li><a href="menu.html" class="navbar__link active">Menu</a></li>
+          <li><a href="galerie.html" class="navbar__link">Galerie</a></li>
+          <li><a href="contact.html" class="navbar__link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="navbar__actions">
+        <a href="contact.html" class="btn btn--primary btn--sm">Réserver</a>
+        <button class="navbar__burger" id="navBurger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="menu-section" style="padding-top: 140px;">
+      <div class="container">
+        <div class="section-header animate-fadein">
+          <span class="section-header__crown">👑</span>
+          <h1 class="section-header__title">Menu de la Semaine</h1>
+          <p class="section-header__subtitle">Une cuisine authentique, chaque jour renouvelée</p>
+          <div class="section-header__divider"></div>
+        </div>
+
+        <div class="menu-display animate-fadein" id="menuDisplay">
+          <div class="menu-display__placeholder" id="menuPlaceholder">
+            <p>📋 Le menu de la semaine sera bientôt affiché.</p>
+            <p>Consultez notre <a href="https://www.facebook.com/profile.php?id=61586475113924" target="_blank">page Facebook</a>.</p>
+          </div>
+          <img id="menuImage" class="menu-display__image" src="" alt="Menu" style="display:none;" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <img src="images/logo.png" alt="Queens" width="36" height="36" />
+          <span>Restaurant Queens</span>
+        </div>
+        <p class="footer__text">© 2026 Restaurant Queens · Diekirch, Luxembourg</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

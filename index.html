@@ -27,14 +27,14 @@
       </a>
       <nav class="navbar__nav" id="navMenu" role="navigation" aria-label="Navigation principale">
         <ul class="navbar__list">
-          <li><a href="#hero" class="navbar__link" data-nav>Accueil</a></li>
-          <li><a href="#menu" class="navbar__link" data-nav>Menu</a></li>
-          <li><a href="#galerie" class="navbar__link" data-nav>Galerie</a></li>
-          <li><a href="#contact" class="navbar__link" data-nav>Contact</a></li>
+          <li><a href="index.html" class="navbar__link active">Accueil</a></li>
+          <li><a href="menu.html" class="navbar__link">Menu</a></li>
+          <li><a href="galerie.html" class="navbar__link">Galerie</a></li>
+          <li><a href="contact.html" class="navbar__link">Contact</a></li>
         </ul>
       </nav>
       <div class="navbar__actions">
-        <a href="#contact" class="btn btn--primary btn--sm navbar__cta-btn" aria-label="Réserver une table">Réserver</a>
+        <a href="contact.html" class="btn btn--primary btn--sm navbar__cta-btn" aria-label="Réserver une table">Réserver</a>
         <button class="navbar__burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navMenu">
           <span></span><span></span><span></span>
         </button>
@@ -59,8 +59,8 @@
         <p class="hero__subtitle">Cuisine Portugaise & Grillades · Diekirch</p>
         <p class="hero__tagline">Tradition, saveurs et passion depuis le cœur du Luxembourg</p>
         <div class="hero__cta">
-          <a href="#menu" class="btn btn--primary" aria-label="Voir le menu">📋 Menu de la Semaine</a>
-          <a href="#contact" class="btn btn--outline" aria-label="Nous contacter">📍 Nous Trouver</a>
+          <a href="menu.html" class="btn btn--primary" aria-label="Voir le menu">📋 Menu de la Semaine</a>
+          <a href="contact.html" class="btn btn--outline" aria-label="Nous contacter">📍 Nous Trouver</a>
         </div>
       </div>
       <div class="hero__scroll" aria-hidden="true">
@@ -88,6 +88,9 @@
           </div>
           <img id="menuImage" class="menu-display__image" src="" alt="Menu de la Semaine – Restaurant Queens" style="display:none;" />
         </div>
+        <div style="text-align: center; margin-top: 40px;">
+          <a href="menu.html" class="btn btn--outline btn--sm">Voir le menu complet</a>
+        </div>
       </div>
     </section>
 
@@ -102,7 +105,10 @@
         </div>
 
         <div class="gallery-mosaic animate-fadein" id="galleryGrid" role="list" aria-label="Photos de nos plats">
-          <!-- Gallery items rendered by JS (from defaults + admin uploads) -->
+          <!-- Gallery items rendered by JS -->
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+          <a href="galerie.html" class="btn btn--outline btn--sm">Voir toute la galerie</a>
         </div>
       </div>
     </section>
@@ -183,40 +189,7 @@
 
 
 
-  <div class="admin-panel" id="adminPanel" hidden>
-    <div class="admin-panel__inner">
-      <div class="admin-panel__header">
-        <h2>🔧 Administration</h2>
-        <button class="admin-panel__close" id="adminClose" aria-label="Fermer le panneau admin">&times;</button>
-      </div>
-
-      <!-- Menu Upload -->
-      <div class="admin-panel__section">
-        <h3>📋 Menu de la Semaine</h3>
-        <p class="admin-panel__hint">Uploadez l'image du menu de la semaine (JPG/PNG)</p>
-        <label class="admin-upload-btn" for="menuUpload" tabindex="0">
-          📤 Choisir une image
-          <input type="file" id="menuUpload" accept="image/*" hidden />
-        </label>
-        <div class="admin-panel__preview" id="menuPreview"></div>
-        <button class="btn btn--sm btn--danger" id="menuClear" style="display:none;">🗑️ Supprimer le menu</button>
-      </div>
-
-      <!-- Gallery Upload -->
-      <div class="admin-panel__section">
-        <h3>📸 Galerie Photos</h3>
-        <p class="admin-panel__hint">Ajoutez des photos à la galerie (max 20 images)</p>
-        <label class="admin-upload-btn" for="galleryUpload" tabindex="0">
-          📤 Ajouter des photos
-          <input type="file" id="galleryUpload" accept="image/*" multiple hidden />
-        </label>
-        <div class="admin-gallery-list" id="adminGalleryList"></div>
-        <button class="btn btn--sm btn--danger" id="galleryClearAll" style="display:none;">🗑️ Supprimer toutes les photos ajoutées</button>
-      </div>
-
-
-    </div>
-  </div>
+  <!-- Admin Panel Injected via JS -->
 
   <!-- ====== FOOTER ====== -->
   <footer class="footer" role="contentinfo">
