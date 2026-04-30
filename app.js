@@ -16,7 +16,7 @@
   };
 
   const API = {
-    WEEKLY_MENU: 'weekly-menu.json'
+    WEEKLY_MENU: '/weekly-menu.json'
   };
 
   const DEFAULT_MENU = {
@@ -33,15 +33,39 @@
   };
 
   const DEFAULT_GALLERY = [
-    { src: 'images/suckling-pig.png',    label: 'Cochon de lait (Leitão)' },
-    { src: 'images/churrasco.png',       label: 'Grillades Mixtes' },
-    { src: 'images/sardines.png',        label: 'Sardines Grillées' },
-    { src: 'images/ribs.png',            label: 'Travers de Porc' },
-    { src: 'images/cassoulet.png',       label: 'Feijoada Royale' },
     { src: 'images/bacalhau.jpg',        label: 'Bacalhau à Portuguesa' },
     { src: 'images/batatas.jpg',         label: 'Bacalhau à Brás' },
     { src: 'images/carpaccio.jpg',       label: 'Carpaccio de Bœuf' },
-    { src: 'images/steak-roquette.jpg',  label: 'Steak Queens' }
+    { src: 'images/steak-roquette.jpg',  label: 'Steak Queens' },
+    { src: 'images/Queens/627743248_122110019841215837_4204416791411020826_n.jpg', label: 'Queens 1' },
+    { src: 'images/Queens/627796303_122110019475215837_5430384203999375145_n.jpg', label: 'Queens 2' },
+    { src: 'images/Queens/634057008_122111468589215837_3828487695051494631_n.jpg', label: 'Queens 3' },
+    { src: 'images/Queens/634087315_122111468895215837_9145182799219835581_n.jpg', label: 'Queens 4' },
+    { src: 'images/Queens/634329209_122111467941215837_8287282115241487640_n.jpg', label: 'Queens 5' },
+    { src: 'images/Queens/636907184_122112865605215837_7686141593221583875_n (1).jpg', label: 'Queens 6' },
+    { src: 'images/Queens/636907184_122112865605215837_7686141593221583875_n.jpg', label: 'Queens 7' },
+    { src: 'images/Queens/637158104_122112865179215837_4988832843147592840_n.jpg', label: 'Queens 8' },
+    { src: 'images/Queens/637662028_122112864855215837_4987314281872629858_n.jpg', label: 'Queens 9' },
+    { src: 'images/Queens/642249865_122114121993215837_6771031720058429946_n.jpg', label: 'Queens 10' },
+    { src: 'images/Queens/642262416_122114120751215837_909782779303998567_n.jpg', label: 'Queens 11' },
+    { src: 'images/Queens/643877238_122114121459215837_7521790760515008819_n.jpg', label: 'Queens 12' },
+    { src: 'images/Queens/646387899_122115605439215837_2113884154243322937_n (1).jpg', label: 'Queens 13' },
+    { src: 'images/Queens/648174269_122115605877215837_654488904260382651_n.jpg', label: 'Queens 14' },
+    { src: 'images/Queens/648816270_122116427199215837_7761401326552966798_n (1).jpg', label: 'Queens 15' },
+    { src: 'images/Queens/649487802_122116427511215837_687368217631153325_n.jpg', label: 'Queens 16' },
+    { src: 'images/Queens/650252552_122116426809215837_8303350991067738372_n (1).jpg', label: 'Queens 17' },
+    { src: 'images/Queens/654310168_122117970891215837_7816125621332543703_n.jpg', label: 'Queens 18' },
+    { src: 'images/Queens/655569381_122117971545215837_384947876179943681_n (1).jpg', label: 'Queens 19' },
+    { src: 'images/Queens/656762720_122119153569215837_4165249356513355796_n (1).jpg', label: 'Queens 20' },
+    { src: 'images/Queens/659027741_122119152999215837_1391761648502867086_n (1).jpg', label: 'Queens 21' },
+    { src: 'images/Queens/660856828_122119153299215837_5879972116388762791_n (1).jpg', label: 'Queens 22' },
+    { src: 'images/Queens/661006864_122120691993215837_8489622086656452210_n.jpg', label: 'Queens 23' },
+    { src: 'images/Queens/661414805_122120419197215837_8382786154582306328_n.jpg', label: 'Queens 24' },
+    { src: 'images/Queens/668591619_122120691573215837_7638015397470135629_n.jpg', label: 'Queens 25' },
+    { src: 'images/Queens/668655139_122121101349215837_4427351680854774101_n.jpg', label: 'Queens 26' },
+    { src: 'images/Queens/669800414_122121100329215837_7060067057218962401_n.jpg', label: 'Queens 27' },
+    { src: 'images/Queens/672675411_122122083891215837_7505544867779962205_n.jpg', label: 'Queens 28' },
+    { src: 'images/Queens/674178109_122122084209215837_2399025347307132532_n.jpg', label: 'Queens 29' }
   ];
 
   // Global state for gallery/lightbox

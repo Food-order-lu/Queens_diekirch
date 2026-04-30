@@ -10,11 +10,11 @@
   <meta property="og:image" content="images/hero.png" />
   <meta property="og:type" content="restaurant" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="icon" href="images/logo.png" type="image/png" />
+  <link rel="icon" href="/images/logo.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="/index.css" />
 </head>
 <body>
 
@@ -22,19 +22,19 @@
   <header class="navbar" id="navbar" role="banner">
     <div class="navbar__inner">
       <a href="#hero" class="navbar__logo" aria-label="Restaurant Queens – Accueil">
-        <img src="images/logo.png" alt="Queens Logo – Couronne dorée" width="44" height="44" />
+        <img src="/images/logo_queens.png" alt="Restaurant Queens Logo" />
         <span class="navbar__brand">Queens</span>
       </a>
       <nav class="navbar__nav" id="navMenu" role="navigation" aria-label="Navigation principale">
         <ul class="navbar__list">
-          <li><a href="index.html" class="navbar__link active">Accueil</a></li>
-          <li><a href="menu.html" class="navbar__link">Menu</a></li>
-          <li><a href="galerie.html" class="navbar__link">Galerie</a></li>
-          <li><a href="contact.html" class="navbar__link">Contact</a></li>
+          <li><a href="/index.html" class="navbar__link active">Accueil</a></li>
+
+          <li><a href="/galerie.html" class="navbar__link">Galerie</a></li>
+          <li><a href="/contact.html" class="navbar__link">Contact</a></li>
         </ul>
       </nav>
       <div class="navbar__actions">
-        <a href="contact.html" class="btn btn--primary btn--sm navbar__cta-btn" aria-label="Réserver une table">Réserver</a>
+        <a href="/contact.html" class="btn btn--primary btn--sm navbar__cta-btn" aria-label="Réserver une table">Réserver</a>
         <button class="navbar__burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navMenu">
           <span></span><span></span><span></span>
         </button>
@@ -47,17 +47,17 @@
     <!-- ====== HERO ====== -->
     <section class="hero" id="hero" aria-label="Bienvenue au Restaurant Queens">
       <div class="hero__bg">
-        <img src="images/hero.jpg" alt="L'équipe du Restaurant Queens – Café Restaurant à Diekirch" loading="eager" />
+        <img src="/images/hero.jpg" alt="L'équipe du Restaurant Queens – Café Restaurant à Diekirch" loading="eager" />
       </div>
       <div class="hero__overlay"></div>
       <div class="hero__content animate-fadein">
-        <img src="images/logo.png" alt="Logo Queens" class="hero__logo" width="120" height="120" />
+        <img src="/images/logo_queens.png" alt="Logo Queens" class="hero__logo" />
         <h1 class="hero__title">Restaurant Queens</h1>
         <p class="hero__subtitle">Cuisine Portugaise & Grillades · Diekirch</p>
         <p class="hero__tagline">Tradition, saveurs et passion depuis le cœur du Luxembourg</p>
         <div class="hero__cta">
-          <a href="#menu" class="btn btn--primary" aria-label="Voir le menu">📋 Menu de la Semaine</a>
-          <a href="contact.html" class="btn btn--outline" aria-label="Nous contacter">📍 Nous Trouver</a>
+
+          <a href="/contact.html" class="btn btn--outline" aria-label="Nous contacter">📍 Nous Trouver</a>
         </div>
       </div>
       <div class="hero__scroll" aria-hidden="true">
@@ -86,12 +86,10 @@
 
           <div class="menu-display__placeholder" id="menuPlaceholder" style="display:none;">
             <p>📋 Le menu de la semaine sera bientôt affiché.</p>
-            <p>Consultez notre <a href="https://www.facebook.com/profile.php?id=61586475113924" target="_blank" rel="noopener noreferrer">page Facebook</a> pour les dernières mises à jour.</p>
+            <p>Consultez notre <a href="https://www.facebook.com/profile.php?id=61586475113924&locale=fr_FR" target="_blank" rel="noopener noreferrer">page Facebook</a> et notre <a href="https://www.instagram.com/restaurant_queens_luxembourg/" target="_blank" rel="noopener noreferrer">page Instagram</a> pour les dernières mises à jour.</p>
           </div>
         </div>
-        <div style="text-align: center; margin-top: 40px;">
-          <a href="menu.html" class="btn btn--outline btn--sm">Voir le menu complet</a>
-        </div>
+
       </div>
     </section>
 
@@ -109,7 +107,7 @@
           <!-- Gallery items rendered by JS -->
         </div>
         <div style="text-align: center; margin-top: 40px;">
-          <a href="galerie.html" class="btn btn--outline btn--sm">Voir toute la galerie</a>
+          <a href="/galerie.html" class="btn btn--outline btn--sm">Voir toute la galerie</a>
         </div>
       </div>
     </section>
@@ -152,16 +150,20 @@
           <div class="contact-card contact-card--social">
             <div class="contact-card__icon" aria-hidden="true">💬</div>
             <h3 class="contact-card__title">Suivez-nous</h3>
-            <a href="https://www.facebook.com/profile.php?id=61586475113924" target="_blank" rel="noopener noreferrer" class="btn btn--facebook" aria-label="Visitez notre page Facebook">
+            <a href="https://www.facebook.com/profile.php?id=61586475113924&locale=fr_FR" target="_blank" rel="noopener noreferrer" class="btn btn--facebook" aria-label="Visitez notre page Facebook">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
               Facebook
+            </a>
+            <a href="https://www.instagram.com/restaurant_queens_luxembourg/" target="_blank" rel="noopener noreferrer" class="btn btn--instagram" aria-label="Visitez notre page Instagram" style="margin-top: 10px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              Instagram
             </a>
           </div>
         </div>
 
         <div class="contact-map animate-fadein">
           <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2573.5!2d6.159!3d49.868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDnCsDUyJzA1LjAiTiA2wrAwOSczMi4wIkU!5e0!3m2!1sfr!2slu!4v1"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2571.5219230995017!2d6.160055799999999!3d49.8702245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bffda7ed4dbd2d%3A0x3f4e08cb047dd69!2sRestaurant%20Queens!5e0!3m2!1sfr!2slu!4v1776893848525!5m2!1sfr!2slu"
             width="100%" 
             height="350" 
             style="border:0; border-radius: 16px;" 
@@ -197,7 +199,7 @@
     <div class="container">
       <div class="footer__inner">
         <div class="footer__brand">
-          <img src="images/logo.png" alt="Queens" width="36" height="36" />
+          <img src="/images/logo_queens.png" alt="Queens" width="36" height="36" />
           <span>Restaurant Queens</span>
         </div>
         <p class="footer__text">© 2026 Restaurant Queens · Diekirch, Luxembourg</p>
@@ -206,6 +208,6 @@
     </div>
   </footer>
 
-  <script src="app.js"></script>
+  <script src="/app.js"></script>
 </body>
 </html>
